@@ -1,11 +1,9 @@
-package study;
+package study.baekjoon.step3;
 
 import java.util.Scanner;
 
-public class Main {
-
+public class Step3_8393 {
     public static void main(String[] args) {
-        // write your code here
         Scanner scanner = new Scanner(System.in);
         int sum = 0;
         int n = scanner.nextInt();
