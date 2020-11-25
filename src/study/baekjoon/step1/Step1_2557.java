@@ -1,4 +1,4 @@
-package study.baekjoon;
+package study.baekjoon.step1;
 
 public class Step1_2557 {
     public static void main(String[] args) {
