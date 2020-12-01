@@ -1,9 +1,8 @@
-package study;
+package study.baekjoon.step7;
 
-import java.util.HashSet;
 import java.util.Scanner;
 
-public class Main {
+public class Step7_10809 {
     public static void main(String[] args) {
         int[] arr = new int[26];
         Scanner scanner = new Scanner(System.in);
