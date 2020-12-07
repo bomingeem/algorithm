@@ -1,38 +1,35 @@
 package study.baekjoon.stack;
 
 import java.util.Scanner;
+import java.util.Stack;
 
-public class boj10828 {
+public class boj10828_2 {
     public static void main(String[] args) {
-        //구현 소스
+        //라이브러리 사용
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
-        int[] stack = new int[n];
-        int size = 0;
-
-        while (n-- > 0) {
+        Stack<Integer> stack = new Stack<Integer>();
+        for(int i=0; i<n; i++) {
             String word = scanner.next();
             if (word.equals("push")) {
                 int num = Integer.parseInt(scanner.next());
-                stack[size] = num;
-                size++;
+                stack.push(num);
             } else if (word.equals("pop")) {
-                if(size == 0) {
+                if(stack.empty()) {
                     System.out.println("-1");
                 } else {
-                    System.out.println(stack[size-1]);
-                    size = size-1;
+                    System.out.println(stack.pop());
                 }
             } else if (word.equals("top")) {
-                if(size == 0) {
+                if(stack.empty()) {
                     System.out.println("-1");
                 } else {
-                    System.out.println(stack[size-1]);
+                    System.out.println(stack.peek());
                 }
             } else if (word.equals("size")) {
-                System.out.println(size);
+                System.out.println(stack.size());
             } else if (word.equals("empty")) {
-                if (size == 0) {
+                if (stack.empty()) {
                     System.out.println("1");
                 } else {
                     System.out.println("0");
