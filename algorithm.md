@@ -29,4 +29,15 @@
  · 입력이 많은 경우에는 속도가 느리기 때문에 BufferedReader를 사용한다
    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
  · 출력이 많은 경우에는 StringBuilder를 사용해서 한 문자열로 만들어서 출력을 한 번만 사용하거나 BufferedWriter를 사용한다
+
+스택(Stack)
+ · 스택은 한쪽 끝에서만 자료를 넣고 뺄 수 있는 자료구조
+ · 마지막으로 넣은 것이 가장 먼저 나오기 때문에 LIFO(Last In First Out) 라고도 한다
+ · push : 스택에 자료를 넣는 연산
+ · pop : 스택에서 자료를 빼는 연산
+ · top : 스택의 가장 위에 있는 자료를 보는 연산
+ · empty : 스택이 비어있는지 아닌지를 알아보는 연산
+ · size : 스택에 저장되어있는 자료의 개수를 알아보는 연산
+스택의 구현
+ · 일차원 배열 하나로 구현할 수 있다
  
