@@ -5,7 +5,7 @@ import java.util.Stack;
 
 public class boj1406 {
     public static void main(String[] args) throws IOException {
-        //시간초과 난다 왜지?
+        //시간초과 난다 왜지
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder word = new StringBuilder(br.readLine()); //편집기에 입력되는 문자열
 
