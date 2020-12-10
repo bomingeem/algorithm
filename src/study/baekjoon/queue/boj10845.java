@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
-public class boj_10845 {
+public class boj10845 {
     public static void main(String[] args) throws IOException {
         //시간초과
         Scanner scanner = new Scanner(System.in);

@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class boj_1158 {
+public class boj1158 {
     public static void main(String[] args) {
         //원에서 사람들이 제거되는 순서를 (N,K)-요세푸스 순열
         //ex) (7,3) → <3,6,2,7,5,1,4>
