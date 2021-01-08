@@ -1,9 +1,8 @@
-package study;
+package study.codeup.basic;
 
-import java.util.HashSet;
 import java.util.Scanner;
 
-public class Main {
+public class codeup1070 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int month = scanner.nextInt();
@@ -31,5 +30,3 @@ public class Main {
         }
     }
 }
-
-
