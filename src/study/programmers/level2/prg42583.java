@@ -27,6 +27,7 @@ public class prg42583 {
                         bridgeToCross.add(truck);
                         answer++;
                         total = total + truck;
+                        break;
                     } else if (bridgeToCross.size() == bridge_length) {
                         //건너야 할 다리는 bridge_length 만큼 트럭이 이용할 수 있다
                         total = total - bridgeToCross.poll();
@@ -44,7 +45,7 @@ public class prg42583 {
                     }
                 }
             }
-            return answer;
+            return answer + bridge_length;
         }
     }
 }
