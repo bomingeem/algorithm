@@ -10,10 +10,12 @@ public class prg42587 {
         System.out.print(solution.solution(priorities, location));
     }
 
-    static class Solution {
+    //이것으론 답이 나오지 않는다..
+    /*
+        static class Solution {
         public int solution(int[] priorities, int location) {
             int answer = 1;
-            //위치도 저장해야 할 것 같다..
+            //위치도 저장해야 할 것 같다
             Queue<Integer> locationQueue = new LinkedList<>();
             Queue<Integer> queue = new LinkedList<>();
 
@@ -31,11 +33,35 @@ public class prg42587 {
 
                         if (save == location) {
                             answer = count;
+                            System.out.print("answer : " + answer);
                             break;
                         }
                     } else {
                         queue.offer(priority);
                         locationQueue.offer(save);
+                    }
+                }
+            }
+            return answer;
+        }
+    }
+    */
+    static class Solution {
+        public int solution(int[] priorities, int location) {
+            int answer = 1;
+            PriorityQueue<Integer> queue = new PriorityQueue<>(Comparator.reverseOrder());
+            for (int i : priorities) {
+                queue.offer(i);
+            }
+            while (!queue.isEmpty()) {
+                for (int i = 0; i < priorities.length; i++) {
+                    if (priorities[i] == queue.peek()) {
+                        //내가 찾고자 하는 location까지 반복
+                        if (location == i) {
+                            return answer;
+                        }
+                        answer++;
+                        queue.poll();
                     }
                 }
             }
