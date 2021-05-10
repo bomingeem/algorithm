@@ -1,6 +1,7 @@
 package study.programmers.level2;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class prg12939 {
     public static void main(String[] args) {
@@ -26,7 +27,13 @@ public class prg12939 {
             answer += intArray[0] + " " + intArray[intArray.length-1];
             */
 
-            //2. 일반적인 최소/최대값 비교를 이용한 풀이
+            //2. Stream을 이용한 풀이
+            /*
+            int iMax = Arrays.stream(intArray).max().getAsInt();
+            int iMin = Arrays.stream(intArray).min().getAsInt();
+            */
+
+            //3. 일반적인 최소/최대값 비교를 이용한 풀이
             int num, min, max;
             min = max = Integer.parseInt(strArray[0]);
             for(int i=0; i<strArray.length; i++) {
@@ -39,6 +46,7 @@ public class prg12939 {
                 }
             }
             answer += min + " " + max;
+
             return answer;
         }
     }
