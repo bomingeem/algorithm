@@ -18,11 +18,10 @@ public class problem5_05 {
             if (str.charAt(i) == '(') {
                 stack.push('(');
             } else if (str.charAt(i) == ')') {
-                if (str.charAt(i-1) == '(') {
-                    stack.pop();
+                stack.pop();
+                if (str.charAt(i-1) == '(') { //레이저
                     answer += stack.size();
-                } else {
-                    stack.pop();
+                } else { //막대기의 끝
                     answer += 1;
                 }
             }
