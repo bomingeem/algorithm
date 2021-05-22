@@ -33,7 +33,6 @@ public class prg17680 {
                 if(cache.contains(city)) {
                     //메모리에 존재 할 경우, LRU 알고리즘에 의해 우선순위를 맨 뒤로 두기 위해서 큐에서 삭제하고 다시 삽입한다
                     cache.remove(city);
-                    cache.offer(city);
                     answer += CACHE_HIT;
                 } else {
                     //메모리에 존재하지 않을 경우 캐시에 삽입, 단 주어진 캐시의 사이즈와 현재 사이즈를 비교하여 full 일 경우 맨 처음 값 삭제
@@ -41,9 +40,9 @@ public class prg17680 {
                     if (currentSize == cacheSize) {
                         cache.poll();
                     }
-                    cache.offer(city);
                     answer += CACHE_MISS;
                 }
+                cache.offer(city);
             }
             return answer;
         }
