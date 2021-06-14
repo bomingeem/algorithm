@@ -12,13 +12,13 @@ public class boj9935 {
         String explosionStr = scanner.nextLine();
 
         while(str.contains(explosionStr)) {
-            String replaceStr = str.replace(explosionStr, "");
-            str = replaceStr;
-            if (!replaceStr.contains(explosionStr)) {
-                if (replaceStr.length() == 0) {
+            str = str.replace(explosionStr, "");
+            //str = replaceStr;
+            if (!str.contains(explosionStr)) {
+                if (str.length() == 0) {
                     answer = "FRULA";
                 } else {
-                    answer = replaceStr;
+                    answer = str;
                 }
                 break;
             }

@@ -13,13 +13,13 @@ public class boj10809 {
         Scanner scanner = new Scanner(System.in);
         S = scanner.next();
         for (int i=0; i<word.length; i++) {
-            word[i] = -1;
+            word[i] = -1; //각 문자의 위치를 가리키는 배열
         }
 
         for (int i=0; i<S.length(); i++) {
             char ch = S.charAt(i);
-            if (word[ch - 'a'] == -1) {
-                word[ch - 'a'] = i;
+            if (word[ch - 97] == -1) { //ch - 'a'
+                word[ch - 97] = i;
             }
         }
 
