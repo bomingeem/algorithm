@@ -84,7 +84,7 @@ public class boj16234 {
 
     public static void BFS(Point p) {
         Queue<Point> queue = new LinkedList<>();
-        List<Point> list = new ArrayList<>();
+        List<Point> unionList = new ArrayList<>();
         sum = 0;
         int divide = 0;
         visited[p.x][p.y] = true;
@@ -92,7 +92,7 @@ public class boj16234 {
 
         while(!queue.isEmpty()) {
             Point point = queue.poll();
-            list.add(point);
+            unionList.add(point);
             int x = point.x;
             int y = point.y;
 
@@ -113,9 +113,9 @@ public class boj16234 {
 
             int people = sum/divide;
 
-            for (int i=0; i<list.size(); i++) {
+            for (int i=0; i<unionList.size(); i++) {
                 //(연합의 인구 수)/(연합을 이루고 있는 칸의 개수)의 값을 대입
-                Point union = list.get(i);
+                Point union = unionList.get(i);
                 A[union.x][union.y] = people;
             }
         }
