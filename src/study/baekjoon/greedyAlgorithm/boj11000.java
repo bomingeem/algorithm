@@ -23,12 +23,14 @@ public class boj11000 {
         priorityQueue.offer(lectures[0].end);
 
         for (int i=1; i<N; i++) {
+            //lectures[0]은 대입 했으므로 1부터 시작
             if (lectures[i].start >= priorityQueue.peek()) {
                 priorityQueue.poll();
             }
             priorityQueue.offer(lectures[i].end);
         }
 
+        //최종적으로 우선순위 큐에 남아있는 것이 강의를 배정하는 동안 사용한 총 강의실의 수
         System.out.println(priorityQueue.size());
     }
 }
@@ -43,6 +45,8 @@ class Lecture implements Comparable<Lecture> {
 
     @Override
     public int compareTo(Lecture o) {
+        //Object 비교 시 비교기준을 정해주어야 한다
+        //오름차순
         if (start == o.start) {
             return end - o.end;
         }
