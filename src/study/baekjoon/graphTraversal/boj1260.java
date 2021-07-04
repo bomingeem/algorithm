@@ -1,4 +1,4 @@
-package study.baekjoon;
+package study.baekjoon.graphTraversal;
 
 import java.util.LinkedList;
 import java.util.Queue;
