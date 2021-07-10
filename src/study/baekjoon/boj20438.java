@@ -18,7 +18,7 @@ public class boj20438 {
         //3 12
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken()); //학생의 수
-        K = Integer.parseInt(st.nextToken()); //졸고있는 학
+        K = Integer.parseInt(st.nextToken()); //졸고있는 학생
         Q = Integer.parseInt(st.nextToken()); //출석코드 보낼 학생의 수
         M = Integer.parseInt(st.nextToken()); //주어질 구간
 
@@ -26,11 +26,6 @@ public class boj20438 {
 
         sleep = new boolean[5005];
         check = new boolean[5005];
-
-        //구간 합 저장
-        for (int i=3; i<N+2; i++) {
-            dp[i] = i;
-        }
 
         //졸고있는 학생
         st = new StringTokenizer(br.readLine());
