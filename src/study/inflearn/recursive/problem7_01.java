@@ -7,6 +7,7 @@ public class problem7_01 {
     }
 
     public void DFS(int n) {
+        //스택 프레임: 매개변수, 지역변수, 복귀주소
         if(n == 0) {
             return;
         } else {
