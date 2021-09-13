@@ -35,7 +35,7 @@ public class boj1743 {
                 if (!visited[i][j] && graph[i][j] == 1) {
                     count = 0;
                     DFS(i, j);
-                    //BFS(i, j);
+//                    BFS(i, j);
                     // 처음에 count 값을 출력했는데 오답이 나왔다
                     // answer 를 선언하여 왜 DFS 를 실행한 수만큼 count 와 answer 의 최대값을 비교해서 대입해야 정답인지 이해가 잘 되지 않는다.
                     answer = Math.max(answer, count);
@@ -72,8 +72,8 @@ public class boj1743 {
             Point temp = queue.poll();
 
             for (int i=0; i<4; i++) {
-                int rx = r + dx[i];
-                int cy = c + dy[i];
+                int rx = temp.x + dx[i];
+                int cy = temp.y + dy[i];
 
                 if (rx < 0 || rx >= N || cy < 0 || cy >= M) continue;
                 if (!visited[rx][cy] && graph[rx][cy] == 1) {
