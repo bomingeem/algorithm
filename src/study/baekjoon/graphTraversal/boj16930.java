@@ -63,7 +63,7 @@ public class boj16930 {
                     nx += dx[i];
                     if (ny < 0 || nx < 0 || ny >= N || nx >= M) break;
                     //현재 방문하는 배열의 수가 visited[position.y][position.x] + 1보다 작아야 하는 조건을 이해 못하겠다
-                    if (graph[ny][nx] == '#' || visited[ny][nx] < visited[position.y][position.x] + 1) break;;
+                    if (graph[ny][nx] == '#' || visited[ny][nx] < visited[position.y][position.x] + 1) break;
                     if (visited[ny][nx] == Integer.MAX_VALUE && graph[ny][nx] == '.') {
                         visited[ny][nx] = visited[position.y][position.x] + 1;
                         queue.offer(new Position(ny, nx));
