@@ -14,10 +14,9 @@ public class boj7569 {
     static int[] dz = {0, 0, 0, 0, 1, -1}; //위 아래
     public static void main(String[] args) {
         //[백준] 토마토
-        //왜 오답이징?
         Scanner scanner = new Scanner(System.in);
-        N = scanner.nextInt();
         M = scanner.nextInt();
+        N = scanner.nextInt();
         H = scanner.nextInt();
         graph = new int[H][N][M];
 
@@ -50,9 +49,9 @@ public class boj7569 {
             count = position.count;
 
             for (int i=0; i<6; i++) {
-                int x = position.n + dx[i];
-                int y = position.m + dy[i];
-                int z = position.h + dz[i];
+                int x = position.x + dx[i];
+                int y = position.y + dy[i];
+                int z = position.z + dz[i];
 
                 if(x >= 0 && y >= 0 && z >= 0 && x < N && y < M && z < H) {
                     if(graph[z][x][y] == 0) {
@@ -84,15 +83,15 @@ public class boj7569 {
     }
 
     static class Position {
-        int h;
-        int n;
-        int m;
+        int z;
+        int x;
+        int y;
         int count;
 
-        public Position(int h, int n, int m, int count) {
-            this.h = h;
-            this.n = n;
-            this.m = m;
+        public Position(int z, int x, int y, int count) {
+            this.z = z;
+            this.x = x;
+            this.y = y;
             this.count = count;
         }
     }
