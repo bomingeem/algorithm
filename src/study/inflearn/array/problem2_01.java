@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class problem2_01 {
     public static void main(String[] args) {
+        //[인프런] 큰 수 출력하기
         problem2_01 problem = new problem2_01();
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
