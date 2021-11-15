@@ -1,18 +1,19 @@
 package study.baekjoon.math;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class boj10872 {
-    public static void main(String[] args) {
-        //재귀 : 자신을 정의할 때 자기 자신을 재 참조하는 방법
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int sum = factorial(n);
-        System.out.println(sum);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String str = br.readLine();
+        int N = Integer.parseInt(str);
+        System.out.println(factorial(N));
     }
 
     public static int factorial(int n) {
-        if (n <= 1) return 1;
-        return n * factorial(n-1);
+        if (n == 0 || n == 1) return 1;
+        else return n * factorial(n-1);
     }
 }
