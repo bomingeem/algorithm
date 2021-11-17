@@ -1,48 +1,38 @@
 package study.baekjoon.bruteforce;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.Scanner;
 
 public class boj2798 {
-    static int N; //카드의 개수
-    static int M;
+    static int N, M;
     static int[] cards;
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         //[백준] 블랙잭
-        //N장 중 3장 고르고 M을 외치다
-        //플레이어가 고른 합은 21을 넘지 않으며 최대한 가깝게 만들어야 한다
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
+        Scanner scanner = new Scanner(System.in);
+        N = scanner.nextInt();
+        M = scanner.nextInt();
         cards = new int[N];
 
-        st = new StringTokenizer(br.readLine(), " ");
-        for (int i=0; i<N; i++) {
-            cards[i] = Integer.parseInt(st.nextToken());
+        for (int i=0; i<cards.length; i++) {
+            cards[i] = scanner.nextInt();
         }
-        System.out.println(quest(cards, N, M));
+        System.out.println(blackjack(cards, N, M));
     }
 
-    static int quest(int[] cards, int n, int m) {
-        int result = 0;
-
-        for (int i=0; i<N-2; i++) {
-            for (int j=i+1; j<N-1; j++) {
-                for (int k=j+1; k<N; k++) {
-                    int temp = cards[i] + cards[j] + cards[k];
-
-                    if (M == temp) return temp;
-
-                    if (result < temp && temp < M) {
-                        result = temp;
+    static int blackjack(int[] arr, int n, int m) {
+        int answer = 0;
+        for (int i=0; i<n-2; i++) {
+            for (int j=i+1; j<n-1; j++) {
+                for (int k=j+1; k<n; k++) {
+                    int temp = arr[i] + arr[j] + arr[k];
+                    if (temp == m) {
+                        return temp;
+                    }
+                    if (temp > answer && temp < m) {
+                        answer = temp;
                     }
                 }
             }
         }
-        return result;
+        return answer;
     }
 }
