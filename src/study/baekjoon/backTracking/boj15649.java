@@ -21,7 +21,10 @@ public class boj15649 {
 
     static void permutation(int[] arr, int[] result, boolean[] visited, int depth, int N, int M) {
         if (depth == M) {
-            print(result, M);
+            for (int i=0; i<M; i++) {
+                System.out.print(result[i] + " ");
+            }
+            System.out.println();
             return;
         }
 
@@ -33,12 +36,5 @@ public class boj15649 {
                 visited[i] = false;
             }
         }
-    }
-
-    static void print(int[] result, int M) {
-        for (int i=0; i<M; i++) {
-            System.out.print(result[i] + " ");
-        }
-        System.out.println();
     }
 }
