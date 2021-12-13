@@ -3,37 +3,37 @@ package study.baekjoon.class3;
 import java.util.Scanner;
 
 public class boj2606 {
-    //바이러스
-    //비슷한 문제를 풀었었는데 문제 추측상 무방향 그래프 + DFS 인 것 같다
+    static int computer; //컴퓨터의 수
+    static int pair; //컴퓨터 쌍의 수
     static int[][] graph;
     static boolean[] visited;
-    static int number, pair;
     static int answer = 0;
-
     public static void main(String[] args) {
+        //[백준] 바이러스
         Scanner scanner = new Scanner(System.in);
-        number = scanner.nextInt(); //컴퓨터의 수
-        pair = scanner.nextInt(); //컴퓨터 쌍의 수
+        computer = scanner.nextInt();
+        pair = scanner.nextInt();
 
-        graph = new int[number+1][number+1];
-        visited = new boolean[number+1];
+        graph = new int[computer+1][computer+1];
+        visited = new boolean[computer+1];
 
         for (int i=1; i<=pair; i++) {
             int x = scanner.nextInt();
             int y = scanner.nextInt();
-            graph[x][y] = graph[y][x] = 1;
+
+            graph[x][y] = 1;
+            graph[y][x] = 1;
         }
 
         DFS(1);
-
         System.out.println(answer);
     }
 
-    public static void DFS(int num) {
-        visited[num] = true;
+    static void DFS(int virus) {
+        visited[virus] = true;
 
-        for (int i=1; i<number+1; i++) {
-            if (graph[num][i] == 1 && !visited[i]) {
+        for (int i=1; i<=computer; i++) {
+            if (graph[virus][i] == 1 && visited[i] == false) {
                 answer++;
                 DFS(i);
             }
