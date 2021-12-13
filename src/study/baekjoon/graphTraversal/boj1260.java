@@ -5,54 +5,55 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class boj1260 {
-    static int n; //정점의 개수
-    static int m; //간선의 개수
-    static int v; //정점의 번호
-    static int graph[][]; //연결상태
-    static boolean[] visited; //방문했는지 안했는지
+    static int N, M, V; //정점, 간선, 정점의 번호
+    static int[][] graph;
+    static boolean[] visited;
     public static void main(String[] args) {
+        //[백준] DFS와 BFS
         Scanner scanner = new Scanner(System.in);
-        n = scanner.nextInt();
-        m = scanner.nextInt();
-        v = scanner.nextInt();
-        graph = new int[n+1][n+1];
-        visited = new boolean[n+1];
+        N = scanner.nextInt();
+        M = scanner.nextInt();
+        V = scanner.nextInt();
 
-        for (int i=0; i<m; i++) {
+        graph = new int[N+1][N+1];
+        visited = new boolean[N+1];
+
+        for (int i=0; i<M; i++) {
             int x = scanner.nextInt();
             int y = scanner.nextInt();
 
             graph[x][y] = graph[y][x] = 1;
         }
-        DFS(v);
+        DFS(V);
         System.out.println();
-        visited = new boolean[n+1];
-        BFS(v);
-
+        visited = new boolean[N+1];
+        BFS(V);
     }
 
-    public static void DFS(int i) {
-        visited[i] = true; //방문 처리: true
-        System.out.print(i + " ");
-        for (int j=1; j<=n; j++) {
-            if (graph[i][j] == 1 && visited[j] == false) {
-                DFS(j);
+    public static void DFS(int v) {
+        visited[v] = true;
+        System.out.print(v + " ");
+        for (int i=1; i<=N; i++) {
+            if (graph[v][i] == 1 && visited[i] == false) {
+                DFS(i);
             }
         }
     }
-    public static void BFS(int i) {
-        Queue<Integer> queue = new LinkedList<Integer>();
-        queue.offer(i);
-        visited[i] = true;
-        System.out.print(i + " ");
-        while (!queue.isEmpty()) {
-            int tmp = queue.poll();
 
-            for (int j=1; j<=n; j++) {
-                if (graph[tmp][j] == 1 && visited[j] == false) {
-                    queue.offer(j);
-                    visited[j] = true;
-                    System.out.print(j + " ");
+    public static void BFS(int v) {
+        Queue<Integer> queue = new LinkedList<>();
+        visited[v] = true;
+        queue.offer(v);
+        System.out.print(v + " ");
+
+        while (!queue.isEmpty()) {
+            int temp = queue.poll();
+
+            for (int i=1; i<=N; i++) {
+                if (graph[temp][i] == 1 && visited[i] == false) {
+                    visited[i] = true;
+                    queue.offer(i);
+                    System.out.print(i + " ");
                 }
             }
         }
