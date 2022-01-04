@@ -5,13 +5,12 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class boj7569 {
-    static int N, M; //상자의 크기를 나타내는 두 정수
-    static int H; //쌓아올려지는 상자의 수
-    static int graph[][][];
-
-    static int[] dx = {1, -1, 0, 0, 0, 0}; //상 하
-    static int[] dy = {0, 0, 1, -1, 0, 0}; //좌 우
-    static int[] dz = {0, 0, 0, 0, 1, -1}; //위 아래
+    static int M, N, H; //가로, 세로, 높이
+    static int[][][] graph;
+    static int day = 0;
+    static int[] dx = {-1, 1, 0, 0, 0, 0};
+    static int[] dy = {0, 0, -1, 1, 0, 0};
+    static int[] dz = {0, 0, 0, 0, -1, 1};
     public static void main(String[] args) {
         //[백준] 토마토
         Scanner scanner = new Scanner(System.in);
@@ -20,10 +19,10 @@ public class boj7569 {
         H = scanner.nextInt();
         graph = new int[H][N][M];
 
-        for (int h=0; h<H; h++) {
-            for (int n=0; n<N; n++) {
-                for (int m=0; m<M; m++) {
-                    graph[h][n][m] = scanner.nextInt();
+        for (int i=0; i<H; i++) {
+            for (int j=0; j<N; j++) {
+                for (int k=0; k<M; k++) {
+                    graph[i][j][k] = scanner.nextInt();
                 }
             }
         }
@@ -31,14 +30,13 @@ public class boj7569 {
     }
 
     static void BFS() {
-        Queue<Position> queue = new LinkedList<>();
-        int count = 0;
+        Queue<Position> queue = new LinkedList<Position>();
 
-        for (int h=0; h<H; h++) {
-            for (int n=0; n<N; n++) {
-                for (int m=0; m<M; m++) {
-                    if (graph[h][n][m] == 1) {
-                        queue.offer(new Position(h, n, m, 0));
+        for (int i=0; i<H; i++) {
+            for (int j=0; j<N; j++) {
+                for (int k=0; k<M; k++) {
+                    if (graph[i][j][k] == 1) {
+                        queue.offer(new Position(i, j, k, day));
                     }
                 }
             }
@@ -46,34 +44,33 @@ public class boj7569 {
 
         while (!queue.isEmpty()) {
             Position position = queue.poll();
-            count = position.count;
+            day = position.day;
 
             for (int i=0; i<6; i++) {
-                int x = position.x + dx[i];
-                int y = position.y + dy[i];
-                int z = position.z + dz[i];
+                int px = position.x + dx[i];
+                int py = position.y + dy[i];
+                int pz = position.z + dz[i];
 
-                if(x >= 0 && y >= 0 && z >= 0 && x < N && y < M && z < H) {
-                    if(graph[z][x][y] == 0) {
-                        graph[z][x][y] = 1;
-                        queue.offer(new Position(z, x, y, count+1));
+                if (px >= 0 && px < N && py >= 0 && py < M && pz >= 0 && pz < H) {
+                    if (graph[pz][px][py] == 0) {
+                        graph[pz][px][py] = 1;
+                        queue.offer(new Position(pz, px, py, day+1));
                     }
                 }
             }
         }
-        if (checkAllTomato()) {
-            System.out.println(count);
+        if (checkVariable()) {
+            System.out.println(day);
         } else {
-            System.out.println("-1");
+            System.out.println(-1);
         }
     }
 
-    //만약, 저장될 때부터 모든 토마토가 익어있는 상태이면 0을 출력해야 하고, 토마토가 모두 익지는 못하는 상황이면 -1을 출력해야 한다
-    static boolean checkAllTomato() {
-        for (int h=0; h<H; h++) {
-            for (int n=0; n<N; n++) {
-                for (int m=0; m<M; m++) {
-                    if (graph[h][n][m] == 0) {
+    static boolean checkVariable() {
+        for (int i=0; i<H; i++) {
+            for (int j=0; j<N; j++) {
+                for (int k=0; k<M; k++) {
+                    if (graph[i][j][k] == 0) {
                         return false;
                     }
                 }
@@ -86,13 +83,13 @@ public class boj7569 {
         int z;
         int x;
         int y;
-        int count;
+        int day;
 
-        public Position(int z, int x, int y, int count) {
+        public Position(int z, int x, int y, int day) {
             this.z = z;
             this.x = x;
             this.y = y;
-            this.count = count;
+            this.day = day;
         }
     }
 }
