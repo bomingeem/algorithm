@@ -1,23 +1,27 @@
 package study.baekjoon.stack;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class boj10828 {
     static int N;
     static int size = 0;
     static int[] stack;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //[백준] 스택
-        Scanner scanner = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer command;
         StringBuilder sb = new StringBuilder();
-        N = scanner.nextInt();
+        N = Integer.parseInt(br.readLine());
         stack = new int[N];
 
         for (int i=0; i<N; i++) {
-            String command = scanner.next();
-            switch (command) {
+            command = new StringTokenizer(br.readLine(), " ");
+            switch (command.nextToken()) {
                 case "push":
-                    push(scanner.nextInt());
+                    push(Integer.parseInt(command.nextToken()));
                     break;
                 case "pop":
                     sb.append(pop()).append("\n");
