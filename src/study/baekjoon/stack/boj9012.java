@@ -4,34 +4,39 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class boj9012 {
+    static int T;
+    static Stack<Character> stack;
     public static void main(String[] args) {
+        //[백준] 괄호
+        boj9012 solution = new boj9012();
         Scanner scanner = new Scanner(System.in);
-        int size = scanner.nextInt();
+        T = scanner.nextInt();
 
-        while (size-- > 0) {
-            int count = 0;
-            boolean vps;
-            String parenthesisString = scanner.next();
-            char temp;
-            for (int i=0; i<parenthesisString.length(); i++) {
-                temp = parenthesisString.charAt(i);
-                if (count < 0) {
-                    vps = false;
+        for (int i=0; i<T; i++) {
+            String parentheses = scanner.next();
+            System.out.println(solution.solution(parentheses));
+        }
+    }
+
+    public String solution(String parentheses) {
+        String answer = "YES";
+        stack = new Stack<>();
+
+        for (char ch : parentheses.toCharArray()) {
+            if (ch == '(') {
+                stack.push(ch);
+            } else {
+                if (stack.isEmpty()) {
+                    answer = "NO";
                     break;
                 }
-                if(temp == '(') {
-                    count++;
-                } else if (temp == ')') {
-                    count--;
-                }
+                stack.pop();
             }
-
-            if(count == 0) {
-                vps = true;
-            } else {
-                vps = false;
-            }
-            System.out.println(vps?"YES":"NO");
         }
+
+        if (!stack.isEmpty()) {
+            answer = "NO";
+        }
+        return answer;
     }
 }
