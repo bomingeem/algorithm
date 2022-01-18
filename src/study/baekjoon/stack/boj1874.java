@@ -6,35 +6,30 @@ import java.util.Stack;
 
 public class boj1874 {
     public static void main(String[] args) {
+        //[백준] 스택수열
         Scanner scanner = new Scanner(System.in);
-        Stack<Integer> stack = new Stack<Integer>();
+        StringBuilder sb = new StringBuilder();
+        Stack<Integer> stack = new Stack<>();
 
-        int size = scanner.nextInt();
-        int[] arr = new int[size+1];
-        int m = 1;
-        ArrayList<String> stackList = new ArrayList<String>();
-        boolean isTrue = true;
+        int N = scanner.nextInt();
+        int start = 0;
 
-        for(int i=1; i<=size; i++) {
-            arr[i] = scanner.nextInt();
-        }
+        while (N-- > 0) {
+            int value = scanner.nextInt();
 
-        for(int i=1; i<=size; i++) {
-            stack.push(i);
-            stackList.add("+");
-            while (!stack.empty() && stack.peek() == arr[m]) {
-                stack.pop();
-                stackList.add("-");
-                m++;
+            if (value > start) {
+                for (int i=start+1; i<=value; i++) {
+                    stack.push(i);
+                    sb.append("+").append("\n");
+                }
+                start = value;
+            } else if (stack.peek() != value) {
+                System.out.println("NO");
+                return;
             }
+            stack.pop();
+            sb.append("-").append("\n");
         }
-
-        if(stack.empty()) {
-            for (String s : stackList) {
-                System.out.println(s);
-            }
-        } else {
-            System.out.println("NO");
-        }
+        System.out.println(sb);
     }
 }
