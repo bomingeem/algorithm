@@ -32,7 +32,7 @@ public class boj4344 {
                 }
             }
 
-            System.out.println((count/N) * 100);
+            System.out.printf("%.3f%%\n", (count/N) * 100);
         }
     }
 }
