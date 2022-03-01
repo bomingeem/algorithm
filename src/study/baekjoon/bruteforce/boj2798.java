@@ -4,35 +4,37 @@ import java.util.Scanner;
 
 public class boj2798 {
     static int N, M;
-    static int[] cards;
+    static int[] blackjack;
+    static int result;
     public static void main(String[] args) {
         //[백준] 블랙잭
         Scanner scanner = new Scanner(System.in);
         N = scanner.nextInt();
         M = scanner.nextInt();
-        cards = new int[N];
+        blackjack = new int[N];
 
-        for (int i=0; i<cards.length; i++) {
-            cards[i] = scanner.nextInt();
+        for (int i=0; i<N; i++) {
+            blackjack[i] = scanner.nextInt();
         }
-        System.out.println(blackjack(cards, N, M));
+
+        System.out.println(permutation(blackjack, N, M));
     }
 
-    static int blackjack(int[] arr, int n, int m) {
-        int answer = 0;
-        for (int i=0; i<n-2; i++) {
-            for (int j=i+1; j<n-1; j++) {
-                for (int k=j+1; k<n; k++) {
-                    int temp = arr[i] + arr[j] + arr[k];
-                    if (temp == m) {
-                        return temp;
+    public static int permutation(int[] array, int N, int M) {
+        for (int i=0; i<N-2; i++) {
+            for (int j=i+1; j<N-1; j++) {
+                for (int k=j+1; k<N; k++) {
+                    int temporaryNumber = array[i] + array[j] + array[k];
+                    if (temporaryNumber == M) {
+                        return temporaryNumber;
                     }
-                    if (temp > answer && temp < m) {
-                        answer = temp;
+
+                    if (temporaryNumber > result && temporaryNumber < M) {
+                        result = temporaryNumber;
                     }
                 }
             }
         }
-        return answer;
+        return result;
     }
 }
