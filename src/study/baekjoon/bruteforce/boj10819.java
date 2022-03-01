@@ -20,12 +20,13 @@ public class boj10819 {
             A[i] = scanner.nextInt();
         }
 
-        permutation(0);
+        permutation(A, temporaryA, visited, 0, N, N);
         System.out.println(result);
     }
 
-    public static void permutation(int count) {
-        if (count == N) {
+    public static void permutation(int[] arr, int[] output, boolean[] visited, int count, int N, int R) {
+        // NOTE: 순열 참고 블로그(https://bcp0109.tistory.com/14)
+        if (count == R) {
             int sum = 0;
             for (int i=0; i<N-1; i++) {
                 sum += Math.abs(temporaryA[i] - temporaryA[i+1]);
@@ -35,13 +36,12 @@ public class boj10819 {
         }
 
         for (int i=0; i<N; i++) {
-            if (visited[i]) {
-                continue;
+            if (!visited[i]) {
+                visited[i] = true;
+                temporaryA[count] = A[i];
+                permutation(arr, output, visited, count+1, N, R);
+                visited[i] = false;
             }
-            visited[i] = true;
-            temporaryA[count] = A[i];
-            permutation(count+1);
-            visited[i] = false;
         }
     }
 }
