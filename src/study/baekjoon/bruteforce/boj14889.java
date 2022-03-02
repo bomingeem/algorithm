@@ -25,6 +25,7 @@ public class boj14889 {
     }
 
     public static void combination(int index, int depth) {
+        //NOTE: 2차원 배열에서 조합을 구할때 사용하는 방법
         if (depth == N/2) {
             int startTeam = 0;
             int linkTeam = 0;
