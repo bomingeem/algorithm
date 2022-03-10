@@ -6,9 +6,9 @@ import java.util.Scanner;
 public class boj2667 {
     static int N;
     static int[][] graph;
+    static boolean[][] visited;
     static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
-    static boolean[][] visited;
     static int count = 0;
     static int[] countList;
     public static void main(String[] args) {
@@ -22,7 +22,7 @@ public class boj2667 {
         for (int i=0; i<N; i++) {
             String str = scanner.next();
             for (int j=0; j<N; j++) {
-                graph[i][j] = str.charAt(j)-'0';
+                graph[i][j] = str.charAt(j) - '0';
             }
         }
 
@@ -34,14 +34,15 @@ public class boj2667 {
                 }
             }
         }
+
         Arrays.sort(countList);
         System.out.println(count);
 
-        for (int i=0; i<countList.length; i++) {
-            if (countList[i] == 0) {
-
+        for (int item : countList) {
+            if (item == 0) {
+                continue;
             } else {
-                System.out.println(countList[i]);
+                System.out.println(item);
             }
         }
     }
@@ -54,7 +55,7 @@ public class boj2667 {
             int nx = x + dx[i];
             int ny = y + dy[i];
 
-            if (nx >= 0 && ny >= 0 && nx < N && ny < N) {
+            if (nx >= 0 && nx < N && ny >= 0 && ny < N) {
                 if (graph[nx][ny] == 1 && !visited[nx][ny]) {
                     DFS(nx, ny);
                 }
