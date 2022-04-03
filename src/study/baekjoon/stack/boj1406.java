@@ -4,49 +4,56 @@ import java.io.*;
 import java.util.Stack;
 
 public class boj1406 {
+    static int M;
     public static void main(String[] args) throws IOException {
-        //시간초과 난다 왜지
+        //[백준] 에디터
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder word = new StringBuilder(br.readLine()); //편집기에 입력되는 문자열
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        Stack<String> leftStack = new Stack<>();
+        Stack<String> rightStack = new Stack<>();
 
-        Stack<Character> leftStack = new Stack<Character>();
-        Stack<Character> rightStack = new Stack<Character>();
+        String sentence = br.readLine();
+        M = Integer.parseInt(br.readLine());
 
-        int m = Integer.parseInt(br.readLine()); //입력할 명령어의 개수
-
-        for(int i=0; i<word.length(); i++) {
-            leftStack.add(word.charAt(i));
+        for (char ch : sentence.toCharArray()) {
+            leftStack.push(String.valueOf(ch));
         }
 
-        while (m-- > 0) {
+        for (int i=0; i<M; i++) {
             String command = br.readLine();
-            if (command.contains("P")) {
-                leftStack.push(command.charAt(2));
-            } else {
-                switch (command) {
-                    case "L":
-                        if (!leftStack.empty()) {
-                            rightStack.push(leftStack.pop());
-                        }
-                        break;
-                    case "D":
-                        if (!rightStack.empty()) {
-                            leftStack.push(rightStack.pop());
-                        }
-                        break;
-                    case "B":
-                        if (!leftStack.empty()) {
-                            leftStack.pop();
-                        }
-                        break;
-                }
+            char ch = command.charAt(0);
+            switch (ch) {
+                case 'L':
+                    if (!leftStack.isEmpty()) {
+                        rightStack.push(leftStack.pop());
+                    }
+                    break;
+                case 'D':
+                    if (!rightStack.isEmpty()) {
+                        leftStack.push(rightStack.pop());
+                    }
+                    break;
+                case 'B':
+                    if (!leftStack.isEmpty()) {
+                        leftStack.pop();
+                    }
+                    break;
+                case 'P':
+                    char character = command.charAt(2);
+                    leftStack.push(String.valueOf(character));
+                    break;
             }
         }
+
         while (!leftStack.isEmpty()) {
             rightStack.push(leftStack.pop());
         }
+
         while (!rightStack.isEmpty()) {
-            System.out.print(rightStack.pop());
+            bw.write(rightStack.pop());
         }
+
+        bw.flush();
+        bw.close();
     }
 }

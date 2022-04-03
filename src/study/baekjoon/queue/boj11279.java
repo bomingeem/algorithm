@@ -1,4 +1,4 @@
-package study.baekjoon.datastructure;
+package study.baekjoon.queue;
 
 import java.util.Collections;
 import java.util.PriorityQueue;

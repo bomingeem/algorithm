@@ -1,4 +1,4 @@
-package study.baekjoon.datastructure.linkedlList;
+package study.baekjoon.stack;
 
 import java.io.*;
 import java.util.Stack;
