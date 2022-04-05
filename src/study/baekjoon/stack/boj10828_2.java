@@ -1,39 +1,41 @@
 package study.baekjoon.stack;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Stack;
+import java.util.StringTokenizer;
 
 public class boj10828_2 {
-    public static void main(String[] args) {
-        //라이브러리 사용
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        Stack<Integer> stack = new Stack<Integer>();
-        for(int i=0; i<n; i++) {
-            String word = scanner.next();
-            if (word.equals("push")) {
-                int num = Integer.parseInt(scanner.next());
-                stack.push(num);
-            } else if (word.equals("pop")) {
-                if(stack.empty()) {
-                    System.out.println("-1");
-                } else {
-                    System.out.println(stack.pop());
-                }
-            } else if (word.equals("top")) {
-                if(stack.empty()) {
-                    System.out.println("-1");
-                } else {
-                    System.out.println(stack.peek());
-                }
-            } else if (word.equals("size")) {
-                System.out.println(stack.size());
-            } else if (word.equals("empty")) {
-                if (stack.empty()) {
-                    System.out.println("1");
-                } else {
-                    System.out.println("0");
-                }
+    static Stack<Integer> stack = new Stack<>();
+    static int N;
+    public static void main(String[] args) throws IOException {
+        //[백준] 스택: stack library 를 사용한 예제
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer command;
+        N = Integer.parseInt(br.readLine());
+
+        for (int i=0; i<N; i++) {
+            command = new StringTokenizer(br.readLine(), " ");
+            switch (command.nextToken()) {
+                case "push":
+                    stack.push(Integer.parseInt(command.nextToken()));
+                    break;
+                case "pop":
+                    if (stack.isEmpty()) System.out.println(-1);
+                    else System.out.println(stack.pop());
+                    break;
+                case "size":
+                    System.out.println(stack.size());
+                    break;
+                case "empty" :
+                    if (stack.isEmpty()) System.out.println(1);
+                    else System.out.println(0);
+                    break;
+                case "top":
+                    if (stack.isEmpty()) System.out.println(-1);
+                    else System.out.println(stack.peek());
+                    break;
             }
         }
     }
