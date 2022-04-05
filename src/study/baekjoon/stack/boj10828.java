@@ -6,15 +6,14 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class boj10828 {
-    static int N;
-    static int size = 0;
     static int[] stack;
+    static int position = 0;
+    static int N;
     public static void main(String[] args) throws IOException {
         //[백준] 스택
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer command;
-        StringBuilder sb = new StringBuilder();
         N = Integer.parseInt(br.readLine());
+        StringTokenizer command;
         stack = new int[N];
 
         for (int i=0; i<N; i++) {
@@ -24,43 +23,41 @@ public class boj10828 {
                     push(Integer.parseInt(command.nextToken()));
                     break;
                 case "pop":
-                    sb.append(pop()).append("\n");
+                    System.out.println(pop());
                     break;
                 case "size":
-                    sb.append(size()).append("\n");
+                    System.out.println(size());
                     break;
                 case "empty":
-                    sb.append(empty()).append("\n");
+                    System.out.println(empty());
                     break;
                 case "top":
-                    sb.append(top()).append("\n");
+                    System.out.println(top());
                     break;
             }
         }
-        System.out.println(sb);
     }
 
-    public static void push(int item) {
-        stack[size] = item;
-        size++;
+    public static void push(int x) {
+        stack[position++] = x;
     }
 
     public static int pop() {
-        if (size == 0) {
+        if (position == 0) {
             return -1;
         } else {
-            int result = stack[size-1];
-            size--;
+            int result = stack[position-1];
+            position--;
             return result;
         }
     }
 
     public static int size() {
-        return size;
+        return position;
     }
 
     public static int empty() {
-        if (size == 0) {
+        if (position == 0) {
             return 1;
         } else {
             return 0;
@@ -68,10 +65,10 @@ public class boj10828 {
     }
 
     public static int top() {
-        if (size == 0) {
+        if (position == 0) {
             return -1;
         } else {
-            return stack[size-1];
+            return stack[position-1];
         }
     }
 }
