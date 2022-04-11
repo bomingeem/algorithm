@@ -5,16 +5,15 @@ import java.util.Stack;
 
 public class boj10773 {
     static int K;
-    static int number;
+    static Stack<Integer> stack = new Stack<>();
     static int answer = 0;
     public static void main(String[] args) {
         //[백준] 제로
         Scanner scanner = new Scanner(System.in);
-        Stack<Integer> stack = new Stack<>();
-
         K = scanner.nextInt();
+
         for (int i=0; i<K; i++) {
-            number = scanner.nextInt();
+            int number = scanner.nextInt();
             if (number == 0 && !stack.isEmpty()) {
                 stack.pop();
             } else {
@@ -22,8 +21,8 @@ public class boj10773 {
             }
         }
 
-        for (int numbers : stack) {
-            answer += numbers;
+        for (Integer result : stack) {
+            answer += result;
         }
 
         System.out.println(answer);
