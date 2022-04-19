@@ -6,26 +6,21 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class boj18258 {
-    static int N;
-    static int start = 0;
-    static int end = 0;
     static int[] queue;
+    static int start, end = 0;
     public static void main(String[] args) throws IOException {
         //[백준] 큐 2
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer command;
         StringBuilder sb = new StringBuilder();
-        N = Integer.parseInt(br.readLine());
-        queue = new int[N];
+        StringTokenizer command;
+        int number = Integer.parseInt(br.readLine());
+        queue = new int[number];
 
-        for (int i=0; i<N; i++) {
+        for (int i=0; i<number; i++) {
             command = new StringTokenizer(br.readLine(), " ");
             switch (command.nextToken()) {
                 case "push":
                     push(Integer.parseInt(command.nextToken()));
-                    break;
-                case "front":
-                    sb.append(front()).append("\n");
                     break;
                 case "pop":
                     sb.append(pop()).append("\n");
@@ -36,16 +31,21 @@ public class boj18258 {
                 case "empty":
                     sb.append(empty()).append("\n");
                     break;
+                case "front":
+                    sb.append(front()).append("\n");
+                    break;
                 case "back":
                     sb.append(back()).append("\n");
+                    break;
+                default:
                     break;
             }
         }
         System.out.println(sb);
     }
 
-    public static void push(int number) {
-        queue[end] = number;
+    public static void push(int x) {
+        queue[end] = x;
         end++;
     }
 
@@ -53,14 +53,14 @@ public class boj18258 {
         if (start == end) {
             return -1;
         } else {
-            int number = queue[start];
+            int result = queue[start];
             start++;
-            return number;
+            return result;
         }
     }
 
     public static int size() {
-        return end-start;
+        return end - start;
     }
 
     public static int empty() {
