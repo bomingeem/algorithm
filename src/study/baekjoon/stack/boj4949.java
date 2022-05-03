@@ -39,6 +39,7 @@ public class boj4949 {
                 }
             }
         }
+
         if (stack.empty()) {
             return "yes";
         } else {
