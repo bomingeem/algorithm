@@ -1,33 +1,33 @@
-package study.baekjoon.bruteforce;
+package study.baekjoon.step10;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class boj7568 {
+    static int[][] bulk;
     public static void main(String[] args) throws IOException {
         //[백준] 덩치
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-        int[][] bulks = new int[N][2];
+        bulk = new int[N][2];
 
-        String[] separatedNumbers;
         for (int i=0; i<N; i++) {
-            separatedNumbers = br.readLine().split(" ");
-            bulks[i][0] = Integer.parseInt(separatedNumbers[0]);
-            bulks[i][1] = Integer.parseInt(separatedNumbers[1]);
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            bulk[i][0] = Integer.parseInt(st.nextToken());
+            bulk[i][1] = Integer.parseInt(st.nextToken());
         }
 
         for (int i=0; i<N; i++) {
-            int rank = 1;
+            int score = 1;
             for (int j=0; j<N; j++) {
-                //같은건 굳이 비교할 필요가 없다.
                 if (i == j) continue;
-                if (bulks[i][0] < bulks[j][0] && bulks[i][1] < bulks[j][1]) {
-                    rank++;
+                if (bulk[i][0] < bulk[j][0] && bulk[i][1] < bulk[j][1]) {
+                    score++;
                 }
             }
-            System.out.print(rank + " ");
+            System.out.print(score + " ");
         }
     }
 }
