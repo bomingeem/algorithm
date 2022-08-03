@@ -1,42 +1,41 @@
 package study.baekjoon.stack;
 
-import java.util.Scanner;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class boj9012 {
     static int T;
-    static Stack<Character> stack;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //[백준] 괄호
-        boj9012 solution = new boj9012();
-        Scanner scanner = new Scanner(System.in);
-        T = scanner.nextInt();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        T = Integer.parseInt(br.readLine());
 
         for (int i=0; i<T; i++) {
-            String parentheses = scanner.next();
-            System.out.println(solution.solution(parentheses));
+            sb.append(solution(br.readLine())).append("\n");
         }
+        System.out.println(sb);
     }
 
-    public String solution(String parentheses) {
-        String answer = "YES";
-        stack = new Stack<>();
-
-        for (char ch : parentheses.toCharArray()) {
+    public static String solution(String bracket) {
+        Stack<Character> stack = new Stack<>();
+        for (char ch : bracket.toCharArray()) {
             if (ch == '(') {
                 stack.push(ch);
+            } else if (stack.isEmpty()) {
+                return "NO";
             } else {
-                if (stack.isEmpty()) {
-                    answer = "NO";
-                    break;
-                }
                 stack.pop();
             }
         }
 
-        if (!stack.isEmpty()) {
-            answer = "NO";
+        if (stack.isEmpty()) {
+            return "YES";
+        } else {
+            return "NO";
         }
-        return answer;
     }
 }
