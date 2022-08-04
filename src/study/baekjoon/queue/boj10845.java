@@ -3,69 +3,68 @@ package study.baekjoon.queue;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class boj10845 {
-    //[백준] 큐
-    static final int MAX = 1000005;
-    static Queue<Integer> queue = new LinkedList<>();
+    static int[] queue = new int[100001];
+    static int N;
+    static int start = 0;
+    static int end = 0;
     public static void main(String[] args) throws IOException {
+        //[백준] 큐
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer command;
         StringBuilder sb = new StringBuilder();
-        int number = Integer.parseInt(br.readLine());
-        int back = -1;
+        N = Integer.parseInt(br.readLine());
 
-        while (number-- > 0) {
-            command = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<N; i++) {
+            StringTokenizer command = new StringTokenizer(br.readLine(), " ");
             switch (command.nextToken()) {
                 case "push":
-                    back = Integer.parseInt(command.nextToken());
-                    queue.offer(back);
+                    push(Integer.parseInt(command.nextToken()));
                     break;
                 case "pop":
-                    sb.append(queue.isEmpty() ? -1 : queue.poll()).append("\n");
+                    sb.append(pop()).append("\n");
                     break;
                 case "size":
-                    sb.append(queue.size()).append("\n");
+                    sb.append(size()).append("\n");
                     break;
                 case "empty":
-                    sb.append(queue.isEmpty() ? 1 : 0).append("\n");
+                    sb.append(empty()).append("\n");
                     break;
                 case "front":
-                    sb.append(queue.isEmpty() ? -1 : queue.peek()).append("\n");
+                    sb.append(front()).append("\n");
                     break;
                 case "back":
-                    sb.append(queue.isEmpty() ? -1 : back).append("\n");
+                    sb.append(back()).append("\n");
                     break;
                 default:
                     break;
             }
         }
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 
-    /*
     public static void push(int x) {
-        queue[++tail] = x;
+        queue[end] = x;
+        end++;
     }
 
     public static int pop() {
-        if (size() == 0) {
+        if (end - start == 0) {
             return -1;
         } else {
-            return queue[head++];
+            int result = queue[start];
+            start++;
+            return result;
         }
     }
 
     public static int size() {
-        return tail-head+1;
+        return end - start;
     }
 
     public static int empty() {
-        if (size() == 0) {
+        if (end - start == 0) {
             return 1;
         } else {
             return 0;
@@ -73,19 +72,18 @@ public class boj10845 {
     }
 
     public static int front() {
-        if (size() == 0) {
+        if (end - start == 0) {
             return -1;
         } else {
-            return queue[head];
+            return queue[start];
         }
     }
 
     public static int back() {
-        if (size() == 0) {
+        if (end - start == 0) {
             return -1;
         } else {
-            return queue[tail];
+            return queue[end - 1];
         }
     }
-    */
 }
