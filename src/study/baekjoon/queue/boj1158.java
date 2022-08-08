@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.StringTokenizer;
 
 public class boj1158 {
     static int N;
@@ -13,10 +14,11 @@ public class boj1158 {
     public static void main(String[] args) throws IOException {
         //[백준] 요세푸스 문제
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         StringBuilder sb = new StringBuilder();
-        String[] commands = br.readLine().split(" ");
-        N = Integer.parseInt(commands[0]);
-        K = Integer.parseInt(commands[1]);
+        N = Integer.parseInt(st.nextToken());
+        K = Integer.parseInt(st.nextToken());
+
         for (int i=0; i<N; i++) {
             queue.offer(i+1);
         }
@@ -28,7 +30,6 @@ public class boj1158 {
             }
             sb.append(queue.poll()).append(", ");
         }
-
         sb.append(queue.poll()).append(">");
         System.out.println(sb);
     }
