@@ -1,45 +1,46 @@
 package study.baekjoon.math;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 
 public class boj6588 {
-    public static final int MAX = 1000000;
-    public static void main(String[] args) {
-        //n = a + b
-        Scanner scanner = new Scanner(System.in);
-        boolean[] check = new boolean[MAX+1];
-        ArrayList<Integer> prime = new ArrayList<Integer>();
-        //int num = scanner.nextInt();
-
-        //true = 소수아님, false = 소수
-        check[0] = check[1] = true;
-        for(int i=2; i*i <= MAX; i++) {
-            if (check[i] == true) {
-                continue;
-            }
-            prime.add(i);
-            for(int j=2*i; j<=MAX; j+=i) {
-                check[j] = true;
-            }
-        }
+    static List<Integer> primes = new ArrayList<>();
+    static boolean[] prime = new boolean[1000000];
+    public static void main(String[] args) throws IOException {
+        //[백준] 골드바흐의 추측
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        prime();
 
         while (true) {
-            int num = scanner.nextInt();
-            if (num == 0) {
+            int n = Integer.parseInt(br.readLine());
+            if (n == 0) {
                 break;
             }
             boolean isWrong = true;
-            for(int i=1; i<prime.size(); i++) {
-                int p = prime.get(i);
-                if (check[num - p] == false) {
-                    System.out.println(num + " = " + p + " + " + (num-p));
+            for (int i=0; i<primes.size(); i++) {
+                int p = primes.get(i);
+                if (!prime[n - p]) {
+                    System.out.println(n + " = " + p + " + " + (n - p));
                     isWrong = false;
                     break;
                 }
             }
-            if(isWrong) {
+            if (isWrong) {
                 System.out.println("Goldbach's conjecture is wrong.");
+            }
+        }
+    }
+
+    public static void prime() {
+        prime[0] = prime[1] = true;
+        for (int i=2; i<Math.sqrt(prime.length); i++) {
+            if (prime[i]) continue;
+            primes.add(i);
+            for (int j=i*i; j<prime.length; j+=i) {
+                prime[j] = true;
             }
         }
     }
