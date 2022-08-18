@@ -12,11 +12,11 @@ public class boj10872 {
         System.out.println(factorial(N));
     }
 
-    public static int factorial(int N) {
-        if (N == 0) {
+    public static int factorial(int n) {
+        if (n == 0) {
             return 1;
         } else {
-            return N*factorial(N-1);
+            return n*factorial(n-1);
         }
     }
 }
