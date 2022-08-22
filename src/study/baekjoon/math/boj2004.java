@@ -1,43 +1,43 @@
 package study.baekjoon.math;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class boj2004 {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int m = scanner.nextInt();
-        int five = 0;
-        int two = 0;
+    public static void main(String[] args) throws IOException {
+        //[백준] 조합 0의 개수
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        long n = Long.parseLong(st.nextToken());
+        long m = Long.parseLong(st.nextToken());
 
-        //a1-b1-c1
-        five = fiveCount(n);
-        five -= fiveCount(n-m);
-        five -= fiveCount(m);
+        /**
+         * nCm = (n,m) = n!/(n-m)!m!
+         * 2의 승수(a1 - b1 - c1) 와 5의 승수(a2 - b2 - c2)가 구해졌으면 겹치는 개수를 구하면 되므로
+         * 2와 5의 승수 중 최솟값을 출력
+         */
+        long multiplierOfFiveCount = multiplierOfFive(n) - multiplierOfFive(n-m) - multiplierOfFive(m);
+        long multiplierOfTwoCount = multiplierOfTwo(n) - multiplierOfTwo(n-m) - multiplierOfTwo(m);
 
-        //a2-b2-c2
-        two = twoCount(n);
-        two -= twoCount(n-m);
-        two -= twoCount(m);
-
-        System.out.println(Math.min(five, two));
+        System.out.println(Math.min(multiplierOfFiveCount, multiplierOfTwoCount));
     }
 
-    public static int fiveCount(int n) {
+    public static long multiplierOfFive(long number) {
         int count = 0;
-
-        while (n >= 5) {
-            count += n/5;
-            n /= 5;
+        while (number >= 5) {
+            count += number/5;
+            number = number/5;
         }
         return count;
     }
 
-    public static int twoCount(int n) {
+    public static long multiplierOfTwo(long number) {
         int count = 0;
-        while (n >= 2) {
-            count += n/2;
-            n /= 2;
+        while (number >= 2) {
+            count += number/2;
+            number = number/2;
         }
         return count;
     }
