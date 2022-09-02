@@ -1,25 +1,26 @@
 package study.baekjoon.bruteforce;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class boj2309 {
     static int[] arr = new int[9];
     static boolean visited = false;
     static int sum = 0;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //[백준] 일곱 난쟁이
-        Scanner scanner = new Scanner(System.in);
-
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         for (int i=0; i<arr.length; i++) {
-            arr[i] = scanner.nextInt();
+            arr[i] = Integer.parseInt(br.readLine());
             sum += arr[i];
         }
 
         for (int i=0; i<arr.length; i++) {
             if (visited) break;
             for (int j=0; j<arr.length; j++) {
-                if (i == j) continue;
+                if (arr[i] == arr[j]) continue;
                 if (sum - arr[i] - arr[j] == 100) {
                     arr[i] = 0;
                     arr[j] = 0;
@@ -30,9 +31,8 @@ public class boj2309 {
         }
 
         Arrays.sort(arr);
-
-        for (int i : arr) {
-            if (i != 0) System.out.println(i);
+        for (int result : arr) {
+            if (result != 0) System.out.println(result);
         }
     }
 }
