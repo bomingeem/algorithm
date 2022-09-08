@@ -12,9 +12,24 @@ public class problem01_09 {
         System.out.println(solution(word));
     }
 
-    public static String solution(String str) {
-        String answer = str.replaceAll("[^0-9]", "")
-                .replaceFirst("^0+(?!$)", "");
-        return answer;
+    public static int solution(String str) {
+        // '0'(48) ~ '9'(57)
+        // String answer = str.replaceAll("[^0-9]", "").replaceFirst("^0+(?!$)", "");
+        String answer = "";
+        for (char ch : str.toCharArray()) {
+            /**
+             * 1. ASCII Number 를 이용한 풀이
+             */
+//            if (ch >= 48 && ch <= 57) {
+//                answer = answer*10 + (ch - 48);
+//            }
+
+            /**
+             * 2. Character.isDigit() 를 이용한 풀이
+             */
+            if (Character.isDigit(ch)) answer += ch;
+        }
+
+        return Integer.parseInt(answer);
     }
 }
