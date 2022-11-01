@@ -1,34 +1,37 @@
 package study.inflearn.stack;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class problem5_01 {
-    //올바른 괄호
-    public static void main(String[] args) {
-        problem5_01 problem = new problem5_01();
-        Scanner scanner = new Scanner(System.in);
-        String str = scanner.next();
-        System.out.println(problem.solution(str));
+    public static void main(String[] args) throws IOException {
+        //[인프런] 올바른 괄호
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String bracket = br.readLine();
+        System.out.println(solution(bracket));
     }
-    public String solution(String str) {
+
+    public static String solution(String bracket) {
         String answer = "YES";
         Stack<Character> stack = new Stack<>();
 
-        for(char x : str.toCharArray()) {
-            if(x == '(') {
-             stack.push(x);
+        for (char ch : bracket.toCharArray()) {
+            if (ch == '(') {
+                stack.push(ch);
             } else {
                 if (stack.isEmpty()) {
-                    answer = "NO";
-                    break;
+                    return "NO";
                 }
                 stack.pop();
             }
         }
-        if (!stack.isEmpty()) { //열린 괄호가 남아있을 경우
-            answer = "NO";
+
+        if (!stack.isEmpty()) {
+            return "NO";
         }
+
         return answer;
     }
 }
