@@ -1,27 +1,31 @@
 package study.inflearn.stack;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class problem5_02 {
-    //괄호문자제거
-    public static void main(String[] args) {
-        problem5_02 problem = new problem5_02();
-        Scanner scanner = new Scanner(System.in);
-        String str = scanner.next();
-        System.out.println(problem.solution(str));
+    public static void main(String[] args) throws IOException {
+        //[인프런] 괄호문자제거
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String str = br.readLine();
+        System.out.println(solution(str));
     }
-    public String solution(String str) {
+
+    public static String solution(String str) {
         String answer = "";
         Stack<Character> stack = new Stack<>();
-        for(char x : str.toCharArray()) {
-            if (x == ')') {
-                while (stack.pop() != '(');
-            } else { //닫는 괄호이거나 알파벳일 경우
-                stack.push(x);
+        for (char ch : str.toCharArray()) {
+            if (ch == ')') {
+                while(stack.pop() != '(') {
+                    ;
+                }
+            } else {
+                stack.push(ch);
             }
         }
-        for(int i=0; i<stack.size(); i++) {
+        for (int i=0; i<stack.size(); i++) {
             answer += stack.get(i);
         }
         return answer;
