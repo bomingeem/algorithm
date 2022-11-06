@@ -1,27 +1,30 @@
 package study.inflearn.stack;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class problem5_05 {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String str = scanner.next();
-        problem5_05 problem = new problem5_05();
-        System.out.println(problem.solution(str));
+    public static void main(String[] args) throws IOException {
+        //[인프런] 쇠막대기
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String stick = br.readLine();
+        System.out.println(solution(stick));
     }
-    public int solution(String str) {
+
+    public static int solution(String stick) {
         int answer = 0;
         Stack<Character> stack = new Stack<>();
 
-        for (int i=0; i<str.length(); i++) {
-            if (str.charAt(i) == '(') {
+        for (int i=0; i<stick.length(); i++) {
+            if (stick.charAt(i) == '(') {
                 stack.push('(');
-            } else if (str.charAt(i) == ')') {
+            } else {
                 stack.pop();
-                if (str.charAt(i-1) == '(') { //레이저
+                if (stick.charAt(i-1) == '(') {
                     answer += stack.size();
-                } else { //막대기의 끝
+                } else {
                     answer += 1;
                 }
             }
