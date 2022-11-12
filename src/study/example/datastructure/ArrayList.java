@@ -116,17 +116,21 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     @Override
     public void clear() {
-
+        for (int i=0; i<size; i++) {
+            elementData[i] = null;
+        }
+        size = 0;
+        resize();
     }
 
     public int lastIndexOf(Object value) {
