@@ -2,7 +2,7 @@ package study.example.datastructure;
 
 import java.util.Arrays;
 
-public class ArrayList<E> implements List<E> {
+public class ArrayList<E> implements List<E>, Cloneable {
     private static final int DEFAULT_CAPACITY = 10;
     private static final Object[] EMPTY_ELEMENTDATA = {};
     Object[] elementData;
@@ -133,6 +133,14 @@ public class ArrayList<E> implements List<E> {
         resize();
     }
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        ArrayList<?> cloneList = (ArrayList<?>) super.clone();
+        cloneList.elementData = new Object[size];
+        System.arraycopy(elementData, 0, cloneList.elementData, 0, size);
+        return cloneList;
+    }
+
     public int lastIndexOf(Object value) {
         for (int i=size-1; i>=0; i--) {
             if (elementData[i].equals(value)) {
@@ -173,5 +181,18 @@ public class ArrayList<E> implements List<E> {
             elementData = Arrays.copyOf(elementData, Math.max(newCapacity, DEFAULT_CAPACITY));
             return;
         }
+    }
+
+    public Object[] toArray() {
+        return Arrays.copyOf(elementData, size);
+    }
+
+    public <T> T[] toArray(T[] a) {
+        if (a.length < size) {
+            return (T[]) Arrays.copyOf(elementData, size, a.getClass());
+        }
+
+        System.arraycopy(elementData, 0, a, 0, size);
+        return a;
     }
 }
