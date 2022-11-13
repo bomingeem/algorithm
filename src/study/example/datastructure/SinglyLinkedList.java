@@ -1,5 +1,7 @@
 package study.example.datastructure;
 
+import java.util.NoSuchElementException;
+
 public class SinglyLinkedList<E> implements List<E> {
     private Node<E> head;
     private Node<E> tail;
@@ -76,12 +78,99 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public boolean remove(Object value) {
-        return false;
+        Node<E> prevNode = head;
+        boolean hasValue = false;
+        Node<E> x = head;
+
+        //value와 일치하는 노드를 찾는다
+        for (; x!=null; x = x.next) {
+            if (value.equals(x.data)) {
+                hasValue = true;
+                break;
+            }
+            prevNode = x;
+        }
+
+        //일치하는 요소가 없을 경우 false 반환
+        if (x == null) {
+            return false;
+        }
+
+        //만약 삭제하려는 노드가 head라면 기존 remove() 사용
+        if (x.equals(head)) {
+            remove();
+            return true;
+        } else {
+            //이전 노드의 링크를 삭제하려는 노드의 다음 노드로 연결
+            prevNode.next = x.next;
+
+            //만약 삭제했던 노드가 마지막 노드라면 tail을 prevNode로 갱신
+            if (prevNode.next == null) {
+                tail = prevNode;
+            }
+            x.data = null;
+            x.next = null;
+            size--;
+            return true;
+        }
     }
 
     @Override
     public E remove(int index) {
-        return null;
+        if (index == 0) {
+            return remove();
+        }
+
+        if (index >= size || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        Node<E> prevNode = search(index - 1);
+        Node<E> removeNode = prevNode.next;
+        Node<E> nextNode = removeNode.next;
+        E element = removeNode.data;
+
+        prevNode.next = nextNode;
+
+        if (prevNode.next == null) {
+            tail = prevNode;
+        }
+
+        removeNode.data = null;
+        removeNode.next = null;
+        size--;
+
+        return element;
+    }
+
+    public E remove() {
+        Node<E> headNode = head;
+
+        if (headNode == null) {
+            throw new NoSuchElementException();
+        }
+
+        //삭제된 노드를 반환하기 위한 임시 변수
+        E element = headNode.data;
+        //head 노드의 다음 노드
+        Node<E> nextNode = head.next;
+
+        //head 노드의 데이터들을 모두 삭제
+        head.data = null;
+        head.next = null;
+
+        //head 가 다음 노드를 가리키도록 업데이트
+        head = nextNode;
+        size--;
+
+        /**
+         * 삭제된 요소가 리스트의 유일한 요소였을 경우 그 요소는 head이자 tail이였으므로
+         * 삭제되면서 tail도 가리킬 요소가 없기 때문에 size가 0일 경우 tail도 null로 변환
+         */
+        if (size == 0) {
+            tail = null;
+        }
+        return element;
     }
 
     @Override
