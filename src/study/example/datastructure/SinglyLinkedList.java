@@ -2,7 +2,7 @@ package study.example.datastructure;
 
 import java.util.NoSuchElementException;
 
-public class SinglyLinkedList<E> implements List<E> {
+public class SinglyLinkedList<E> implements List<E>, Cloneable {
     private Node<E> head;
     private Node<E> tail;
     private int size;
@@ -223,6 +223,20 @@ public class SinglyLinkedList<E> implements List<E> {
         }
         head = tail = null;
         size = 0;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        SinglyLinkedList<? super E> clone = (SinglyLinkedList<? super E>) super.clone();
+        clone.head = null;
+        clone.tail = null;
+        clone.size = 0;
+
+        for (Node<E> x = head; x != null; x = x.next) {
+            clone.addLast(x.data);
+        }
+
+        return clone;
     }
 
     private Node<E> search(int index) {
