@@ -47,7 +47,7 @@ public class SinglyLinkedList<E> implements List<E>, Cloneable {
          * 또한 새 노드가 가리키는 노드는 nextNode로 설정해준다
          */
         prevNode.next = null;
-        prevNode.next = nextNode;
+        prevNode.next = newNode;
         newNode.next = nextNode;
         size++;
     }
