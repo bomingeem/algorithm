@@ -1,4 +1,6 @@
-package study.example.datastructure;
+package study.example.datastructure.singly;
+
+import study.example.datastructure.List;
 
 import java.util.NoSuchElementException;
 

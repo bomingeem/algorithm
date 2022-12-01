@@ -1,4 +1,4 @@
-package study.example.datastructure;
+package study.example.datastructure.singly;
 
 public class Node<E> {
     E data;
