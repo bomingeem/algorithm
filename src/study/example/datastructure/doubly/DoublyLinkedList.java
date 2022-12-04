@@ -188,22 +188,44 @@ public class DoublyLinkedList<E> implements List<E> {
 
     @Override
     public E get(int index) {
-        return null;
+        return search(index).data;
     }
 
     @Override
     public void set(int index, E value) {
-
+        Node<E> replaceNode = search(index);
+        replaceNode.data = null;
+        replaceNode.data = value;
     }
 
     @Override
     public boolean contains(Object value) {
-        return false;
+        return indexOf(value) >= 0;
     }
 
     @Override
     public int indexOf(Object value) {
-        return 0;
+        int index = 0;
+
+        for (Node<E> x = head; x != null; x = x.next) {
+            if (value.equals(x.data)) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
+    }
+
+    public int lastIndexOf(Object value) {
+        int index = size;
+
+        for (Node<E> x = tail; x != null; x = x.prev) {
+            index--;
+            if (value.equals(x.data)) {
+                return index;
+            }
+        }
+        return -1;
     }
 
     @Override
