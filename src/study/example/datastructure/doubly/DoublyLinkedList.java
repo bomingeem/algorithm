@@ -2,6 +2,8 @@ package study.example.datastructure.doubly;
 
 import study.example.datastructure.List;
 
+import java.util.NoSuchElementException;
+
 public class DoublyLinkedList<E> implements List<E> {
 
     private Node<E> head;
@@ -83,12 +85,105 @@ public class DoublyLinkedList<E> implements List<E> {
 
     @Override
     public boolean remove(Object value) {
-        return false;
+        Node<E> prevNode = this.head;
+        Node<E> x = this.head;
+
+        for (; x != null; x = x.next) {
+            if (value.equals(x.data)) {
+                break;
+            }
+            prevNode = x;
+        }
+
+        if (x == null) {
+            return false;
+        }
+
+        if (x.equals(head)) {
+            remove();
+            return true;
+        } else {
+            Node<E> nextNode = x.next;
+            prevNode.next = null;
+            x.prev = null;
+            x.data = null;
+            x.next = null;
+
+            if (nextNode != null) {
+                nextNode.prev = null;
+                nextNode.prev = prevNode;
+                prevNode.next = nextNode;
+            } else {
+                tail = prevNode;
+            }
+
+            size--;
+            return true;
+        }
     }
 
     @Override
     public E remove(int index) {
-        return null;
+        if (index >= size || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        if (index == 0) {
+            E element = head.data;
+            remove();
+            return element;
+        }
+
+        Node<E> prevNode = search(index - 1);
+        Node<E> removeNode = prevNode.next;
+        Node<E> nextNode = removeNode.next;
+
+        E element = removeNode.data;
+
+        prevNode.next = null;
+        removeNode.prev = null;
+        removeNode.data = null;
+        removeNode.next = null;
+
+        if (nextNode != null) {
+            nextNode.prev = null;
+            prevNode.next = nextNode;
+            nextNode.prev = prevNode;
+        } else {
+            tail = prevNode;
+        }
+
+        size--;
+
+        return element;
+    }
+
+    public E remove() {
+        Node<E> headNode = this.head;
+
+        if (headNode == null) {
+            throw new NoSuchElementException();
+        }
+
+        E element = headNode.data;
+
+        Node<E> nextNode = headNode.next;
+
+        head.data = null;
+        head.next = null;
+
+        if (nextNode != null) {
+            nextNode.prev = null;
+        }
+
+        head = nextNode;
+        size--;
+
+        if (size == 0) {
+            tail = null;
+        }
+
+        return element;
     }
 
     @Override
