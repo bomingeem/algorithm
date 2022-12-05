@@ -64,22 +64,39 @@ public class Stack<E> implements StackInterface<E> {
 
     @Override
     public int search(Object value) {
-        return 0;
+        if (value == null) {
+            for (int index = size-1; index>=0; index--) {
+                if (array[index] == null) {
+                    return size - index;
+                }
+            }
+        } else {
+            for (int index = size-1; index>=0; index--) {
+                if (array[index].equals(value)) {
+                    return size - index;
+                }
+            }
+        }
+        return -1;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public void clear() {
-
+        for (int i=0; i<size; i++) {
+            array[i] = null;
+        }
+        size = 0;
+        resize();
     }
 
     @Override
     public boolean empty() {
-        return false;
+        return size == 0;
     }
 
     private void resize() {
