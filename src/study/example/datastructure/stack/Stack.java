@@ -3,6 +3,7 @@ package study.example.datastructure.stack;
 import study.example.datastructure.interface_form.StackInterface;
 
 import java.util.Arrays;
+import java.util.EmptyStackException;
 
 public class Stack<E> implements StackInterface<E> {
     private static final int DEFAULT_CAPACITY = 10;
@@ -24,17 +25,41 @@ public class Stack<E> implements StackInterface<E> {
 
     @Override
     public E push(E item) {
-        return null;
+        if (size == array.length) {
+            resize();
+        }
+
+        array[size] = item;
+        size++;
+
+        return item;
     }
 
     @Override
     public E pop() {
-        return null;
+        if (size == 0) {
+            throw new EmptyStackException();
+        }
+
+        @SuppressWarnings("unchecked")
+        E object = (E) array[size - 1];
+
+        array[size - 1] = null;
+
+        size--;
+        resize();
+
+        return object;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public E peek() {
-        return null;
+        if (size == 0) {
+            throw new EmptyStackException();
+        }
+
+        return (E) array[size - 1];
     }
 
     @Override
