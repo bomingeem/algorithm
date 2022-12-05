@@ -1,4 +1,4 @@
-package study.example.datastructure;
+package study.example.datastructure.list;
 
 public interface List<E> {
     /**
