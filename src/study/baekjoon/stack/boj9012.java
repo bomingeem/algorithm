@@ -7,17 +7,14 @@ import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class boj9012 {
-    static int T;
     public static void main(String[] args) throws IOException {
         //[백준] 괄호
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
-        T = Integer.parseInt(br.readLine());
+        int T = Integer.parseInt(br.readLine());
 
         for (int i=0; i<T; i++) {
-            sb.append(solution(br.readLine())).append("\n");
+            System.out.println(solution(br.readLine()));
         }
-        System.out.println(sb);
     }
 
     public static String solution(String bracket) {
@@ -25,17 +22,17 @@ public class boj9012 {
         for (char ch : bracket.toCharArray()) {
             if (ch == '(') {
                 stack.push(ch);
-            } else if (stack.isEmpty()) {
+            } else if (stack.empty()) {
                 return "NO";
             } else {
                 stack.pop();
             }
         }
 
-        if (stack.isEmpty()) {
-            return "YES";
-        } else {
+        if (!stack.empty()) {
             return "NO";
+        } else {
+            return "YES";
         }
     }
 }
