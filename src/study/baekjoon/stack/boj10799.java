@@ -6,18 +6,22 @@ import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class boj10799 {
-    static int count = 0;
-    static Stack<String> stack = new Stack<>();
     public static void main(String[] args) throws IOException {
         //[백준] 쇠막대기
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String bracket = br.readLine();
+        String bar = br.readLine();
 
-        for (int i=0; i<bracket.length(); i++) {
-            if (bracket.charAt(i) == '(') {
-                stack.push("(");
-            } else if (bracket.charAt(i) == ')') {
-                if (bracket.charAt(i-1) == '(') {
+        System.out.println(solution(bar));
+    }
+
+    public static int solution(String bar) {
+        Stack<Integer> stack = new Stack<>();
+        int count = 0;
+        for (int i=0; i<bar.length(); i++) {
+            if (bar.charAt(i) == '(') {
+                stack.push(i);
+            } else {
+                if (stack.peek() + 1 == i) {
                     stack.pop();
                     count += stack.size();
                 } else {
@@ -26,6 +30,6 @@ public class boj10799 {
                 }
             }
         }
-        System.out.println(count);
+        return count;
     }
 }
