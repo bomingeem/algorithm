@@ -8,29 +8,31 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class boj1158 {
-    static int N;
-    static int K;
-    static Queue<Integer> queue = new LinkedList<>();
     public static void main(String[] args) throws IOException {
         //[백준] 요세푸스 문제
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-        StringBuilder sb = new StringBuilder();
-        N = Integer.parseInt(st.nextToken());
-        K = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+        System.out.println(solution(N, K));
+    }
 
-        for (int i=0; i<N; i++) {
+    public static String solution(int n, int k) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<");
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i=0; i<n; i++) {
             queue.offer(i+1);
         }
 
-        sb.append("<");
         while (queue.size() > 1) {
-            for (int i=0; i<K-1; i++) {
+            for (int i=0; i<k-1; i++) {
                 queue.offer(queue.poll());
             }
             sb.append(queue.poll()).append(", ");
         }
+
         sb.append(queue.poll()).append(">");
-        System.out.println(sb);
+        return sb.toString();
     }
 }
