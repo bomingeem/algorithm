@@ -1,27 +1,30 @@
-package study.baekjoon.graphTraversal;
+package study.baekjoon.graph;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class boj1260 {
-    static int N, M, V; //정점, 간선, 정점의 번호
+    static int N, M, V;
     static int[][] graph;
     static boolean[] visited;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //[백준] DFS와 BFS
-        Scanner scanner = new Scanner(System.in);
-        N = scanner.nextInt();
-        M = scanner.nextInt();
-        V = scanner.nextInt();
-
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        V = Integer.parseInt(st.nextToken());
         graph = new int[N+1][N+1];
         visited = new boolean[N+1];
 
         for (int i=0; i<M; i++) {
-            int x = scanner.nextInt();
-            int y = scanner.nextInt();
-
+            st = new StringTokenizer(br.readLine(), " ");
+            int x = Integer.parseInt(st.nextToken());
+            int y = Integer.parseInt(st.nextToken());
             graph[x][y] = graph[y][x] = 1;
         }
         DFS(V);
@@ -33,8 +36,9 @@ public class boj1260 {
     public static void DFS(int v) {
         visited[v] = true;
         System.out.print(v + " ");
+
         for (int i=1; i<=N; i++) {
-            if (graph[v][i] == 1 && visited[i] == false) {
+            if (!visited[i] && graph[v][i] == 1) {
                 DFS(i);
             }
         }
@@ -47,10 +51,10 @@ public class boj1260 {
         System.out.print(v + " ");
 
         while (!queue.isEmpty()) {
-            int temp = queue.poll();
+            Integer temp = queue.poll();
 
             for (int i=1; i<=N; i++) {
-                if (graph[temp][i] == 1 && visited[i] == false) {
+                if (!visited[i] && graph[temp][i] == 1) {
                     visited[i] = true;
                     queue.offer(i);
                     System.out.print(i + " ");
