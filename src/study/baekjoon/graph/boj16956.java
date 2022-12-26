@@ -1,4 +1,4 @@
-package study.baekjoon.graphTraversal;
+package study.baekjoon.graph;
 
 import java.io.BufferedReader;
 import java.io.IOException;
