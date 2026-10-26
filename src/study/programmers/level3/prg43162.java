@@ -1,27 +1,27 @@
 package study.programmers.level3;
 
 public class prg43162 {
-    //[프로그래머스] 네트워크
     public static int solution(int n, int[][] computers) {
         int answer = 0;
         boolean[] visited = new boolean[n];
 
-        for (int i=0; i<n; i++) {
+        for (int i=0; i<computers.length; i++) {
             if (!visited[i]) {
-                DFS(computers, i, visited);
+                dfs(i, computers, visited);
                 answer++;
             }
         }
+
         return answer;
     }
 
-    public static void DFS(int[][] computers, int i, boolean[] visited) {
-        visited[i] = true;
-
-        for (int j=0; j<computers.length; j++) {
-            if (computers[i][j] == 1 && !visited[j]) {
-                DFS(computers, j, visited);
+    public static void dfs(int node, int[][] computers, boolean[] visited) {
+        visited[node] = true;
+        for (int next = 0; next<computers.length; next++) {
+            if (!visited[next] && computers[node][next] == 1) {
+                dfs(next, computers, visited);
             }
         }
     }
+
 }
