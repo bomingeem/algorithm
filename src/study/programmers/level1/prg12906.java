@@ -1,13 +1,12 @@
 package study.programmers.level1;
 
-import study.example.datastructure.stack.Stack;
+
+import java.util.Stack;
 
 public class prg12906 {
     public int[] solution(int[] arr) {
         Stack<Integer> stack = new Stack<>();
         for (int a : arr) {
-            // 1, 1, 3, 3, 0, 1, 1
-            // 1 3 0 1
             if (stack.empty() || stack.peek() != a) {
                 stack.push(a);
             }
