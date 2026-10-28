@@ -4,46 +4,38 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class prg1844 {
-    //[프로그래머스] 게임 맵 최단거리
     static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
 
     public static int solution(int[][] maps) {
-        int answer = 0;
         int[][] visited = new int[maps.length][maps[0].length];
-
-        BFS(maps, visited);
-        answer = visited[maps.length - 1][maps[0].length - 1];
-
-        if (answer == 0) {
-            answer = -1;
-        }
-
-        return answer;
+        bfs(maps, dx, dy, visited);
+        int answer = visited[maps.length - 1][maps[0].length - 1];
+        return answer == 0 ? -1 : answer;
     }
 
-    public static void BFS(int[][] maps, int[][] visited) {
-        int x = 0, y = 0;
-        visited[x][y] = 1;
-
+    public static void bfs(int[][] maps, int[] dx, int[] dy, int[][] visited) {
         Queue<int[]> queue = new LinkedList<>();
-        queue.offer(new int[]{x, y});
+        queue.offer(new int[]{0, 0});
+        visited[0][0] = 1;
 
         while (!queue.isEmpty()) {
-            int[] position = queue.poll();
-            int px = position[0];
-            int py = position[1];
+            int[] poll = queue.poll();
+            int x = poll[0];
+            int y = poll[1];
 
-            for (int i = 0; i < 4; i++) {
-                int nx = dx[i] + px;
-                int ny = dy[i] + py;
+            for (int d=0; d<4; d++) {
+                int nx = x + dx[d];
+                int ny = y + dy[d];
+
                 if (nx >= 0 && nx < maps.length && ny >= 0 && ny < maps[0].length) {
-                    if (visited[nx][ny] == 0 && maps[nx][ny] == 1) {
-                        visited[nx][ny] = visited[px][py] + 1;
+                    if (maps[nx][ny] == 1 && visited[nx][ny] == 0) {
+                        visited[nx][ny] = visited[x][y] + 1;
                         queue.offer(new int[]{nx, ny});
                     }
                 }
             }
         }
     }
+
 }
